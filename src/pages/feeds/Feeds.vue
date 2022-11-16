@@ -17,12 +17,19 @@
       </TopPanel>
     </div>
   </div>
+  <Post>
+    <template #content>
+      <Socials star="156k" fork="4"></Socials>
+    </template>
+  </Post>
 </template>
 
 <script>
 import TopPanel from "../../components/TopPanel/TopPanel.vue"
 import MenuList from "../../components/MenuList/MenuList.vue"
 import ContactItem from "../../components/ContactItem/ContactItem.vue"
+import Post from "../../components/Post/Post.vue"
+import Socials from "../../components/Post/Socials.vue"
 import { Icon } from "../../icons"
 import contacts from "../mock/contacts.JSON"
 
@@ -33,7 +40,9 @@ export default {
     TopPanel,
     MenuList,
     Icon,
-    ContactItem
+    ContactItem,
+    Post,
+    Socials
   },
   data() {
     return {
