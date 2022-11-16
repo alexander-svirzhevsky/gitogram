@@ -7,7 +7,11 @@
           <MenuList />
         </template>
         <template #contacts>
-          <ContactItem imgSrc="https://picsum.photos/200/300" name="Alex"></ContactItem>
+          <ul class="contacts__list">
+            <li class="contacts__item" v-for="contact in contacts" :key="contact.id">
+              <ContactItem :imgSrc="contact.imgSrc" :name="contact.name"></ContactItem>
+            </li>
+          </ul>
         </template>
       </TopPanel>
     </div>
@@ -17,8 +21,10 @@
 <script>
 import TopPanel from "../../components/TopPanel/TopPanel.vue"
 import MenuList from "../../components/MenuList/MenuList.vue"
-import ContactItem from "../../components/ContactsList/ContactItem.vue"
+import ContactItem from "../../components/ContactItem/ContactItem.vue"
 import { Icon } from "../../icons"
+import contacts from "../mock/contacts.JSON"
+
 
 export default {
   name: 'Feeds',
@@ -27,6 +33,11 @@ export default {
     MenuList,
     Icon,
     ContactItem
+  },
+  data() {
+    return {
+      contacts
+    }
   }
 }
 </script>
@@ -36,5 +47,10 @@ export default {
   padding-top: 43px;
   padding-bottom: 33px;
   background: #FAFAFA;
+}
+
+.contacts__list {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

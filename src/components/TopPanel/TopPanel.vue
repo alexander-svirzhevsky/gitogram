@@ -2,7 +2,7 @@
 	<div class="header">
 		<slot name="header"></slot>
 	</div>
-	<div class="contacts" v-if="$slots.content">
+	<div class="contacts" v-if="$slots.contacts">
 		<slot name="contacts"></slot>
 	</div>
 </template>
