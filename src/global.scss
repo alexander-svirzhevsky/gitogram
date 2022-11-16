@@ -1,0 +1,70 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-fonr-smoothing: grayscale;
+  color: #262626;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+@for $i from 1 through 6 {
+  h#{$i} {
+    margin: 0;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+p {
+  margin: 0;
+}
+
+svg {
+  display: block;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+#app {
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #262626;
+}
+
+.wrapper {
+  overflow: hidden;
+  min-height: 100%;
+  position: relative;
+}
+
+.x-container {
+  width: 1200px;
+  margin: 0 auto;
+}
