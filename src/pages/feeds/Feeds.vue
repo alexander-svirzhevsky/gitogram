@@ -9,7 +9,8 @@
         <template #contacts>
           <ul class="contacts__list">
             <li class="contacts__item" v-for="contact in contacts" :key="contact.id">
-              <ContactItem :imgSrc="contact.imgSrc" :name="contact.name"></ContactItem>
+              <ContactItem :imgSrc="contact.imgSrc" :name="contact.name" @on-contact-click="onContactClick">
+              </ContactItem>
             </li>
           </ul>
         </template>
@@ -38,6 +39,11 @@ export default {
     return {
       contacts
     }
+  },
+  methods: {
+    onContactClick(value) {
+      console.log("click on contact", value);
+    }
   }
 }
 </script>
@@ -47,6 +53,7 @@ export default {
   padding-top: 43px;
   padding-bottom: 33px;
   background: #FAFAFA;
+  box-shadow: 0px 0.33px 0px rgba(60, 60, 67, 0.29);
 }
 
 .contacts__list {

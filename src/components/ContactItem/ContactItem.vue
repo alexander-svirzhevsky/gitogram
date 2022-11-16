@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <div class="contact__img">
+    <div class="contact__img" @click="onContactClick(name)">
       <img :src="imgSrc" :alt="name" class="contact__avatar">
     </div>
     <span>{{ name }}</span>
@@ -19,6 +19,11 @@ export default {
     name: {
       type: String,
       required: true
+    }
+  },
+  methods: {
+    onContactClick(name) {
+      this.$emit("onContactClick", name)
     }
   }
 }
