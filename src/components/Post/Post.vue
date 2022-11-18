@@ -4,16 +4,19 @@
     <div class="content">
       <slot name="content"></slot>
     </div>
+    <Toggler></Toggler>
   </div>
 </template>
 
 <script>
 import Profile from "./Profile.vue"
+import Toggler from "./Toggler.vue"
 
 export default {
   name: "Post",
   components: {
-    Profile
+    Profile,
+    Toggler
   },
   props: {
     profileImg: {
@@ -24,7 +27,7 @@ export default {
       type: String,
       required: true
     }
-  }
+  },
 }
 
 </script>
