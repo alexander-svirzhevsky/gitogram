@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="topPanel">
     <div class="x-container">
       <TopPanel>
         <template #header>
@@ -17,11 +17,17 @@
       </TopPanel>
     </div>
   </div>
-  <Post>
-    <template #content>
-      <Socials star="156k" fork="4"></Socials>
-    </template>
-  </Post>
+  <div class="x-container">
+    <section class="section">
+      <Post name="Boris" profileImg="https://picsum.photos/200/300">
+        <template #content>
+          <div class="title">Vue.js</div>
+          <div class="sub-title">JavaScript framework for building interactive web applications ⚡</div>
+          <Socials star="156k" fork="4"></Socials>
+        </template>
+      </Post>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -58,7 +64,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.content {
+.topPanel {
   padding-top: 43px;
   padding-bottom: 33px;
   background: #FAFAFA;
@@ -68,5 +74,20 @@ export default {
 .contacts__list {
   display: flex;
   justify-content: space-between;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 28px;
+  margin-bottom: 15px;
+}
+
+.sub-title {
+  margin-bottom: 37px;
+}
+
+.section {
+  margin-top: 32px;
 }
 </style>
