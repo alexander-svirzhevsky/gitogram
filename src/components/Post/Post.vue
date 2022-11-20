@@ -1,13 +1,16 @@
 <template>
   <div class="post">
-    <Profile :profileImg=profileImg :name=name></Profile>
+    <Profile :profileImg="profileImg" :name="name"></Profile>
     <div class="content">
       <slot name="content"></slot>
     </div>
     <Toggler @onTogglClick="onTogglClick"></Toggler>
     <ul class="issues" v-if="shown">
       <li v-for="_ in 3">
-        <IssuesItem name="joshua_l" desc="Enable performance measuring in production, at the user's request">
+        <IssuesItem
+          name="joshua_l"
+          desc="Enable performance measuring in production, at the user's request"
+        >
         </IssuesItem>
       </li>
     </ul>
@@ -15,37 +18,36 @@
 </template>
 
 <script>
-import Profile from "./Profile.vue"
-import Toggler from "./Toggler.vue"
-import IssuesItem from "./IssuesItem.vue"
+import Profile from "./Profile.vue";
+import Toggler from "./Toggler.vue";
+import IssuesItem from "./IssuesItem.vue";
 
 export default {
   name: "Post",
   data() {
-    return { shown: false }
+    return { shown: false };
   },
   components: {
     Profile,
     Toggler,
-    IssuesItem
+    IssuesItem,
   },
   props: {
     profileImg: {
       type: String,
-      required: true
+      required: true,
     },
     name: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     onTogglClick(value) {
-      this.shown = value
-    }
-  }
-}
-
+      this.shown = value;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -56,6 +58,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
+  margin-bottom: 24px;
 }
 
 .content {
@@ -65,8 +68,8 @@ export default {
   align-items: flex-start;
   justify-content: center;
   padding: 24px 20px;
-  background: #FFFFFF;
-  border: 1px solid #F1F1F1;
+  background: #ffffff;
+  border: 1px solid #f1f1f1;
   box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
   border-radius: 10px;
   margin-top: 16px;

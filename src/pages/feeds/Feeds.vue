@@ -8,8 +8,16 @@
         </template>
         <template #contacts>
           <ul class="contacts__list">
-            <li class="contacts__item" v-for="contact in contacts" :key="contact.id">
-              <ContactItem :imgSrc="contact.imgSrc" :name="contact.name" @on-contact-click="onContactClick">
+            <li
+              class="contacts__item"
+              v-for="contact in contacts"
+              :key="contact.id"
+            >
+              <ContactItem
+                :imgSrc="contact.imgSrc"
+                :name="contact.name"
+                @on-contact-click="onContactClick"
+              >
               </ContactItem>
             </li>
           </ul>
@@ -19,55 +27,73 @@
   </div>
   <div class="x-container">
     <section class="section">
-      <Post name="Boris" profileImg="https://picsum.photos/200/300">
-        <template #content>
-          <div class="title">Vue.js</div>
-          <div class="sub-title">JavaScript framework for building interactive web applications ⚡</div>
-          <Socials star="156k" fork="4"></Socials>
-        </template>
-      </Post>
+      <ul>
+        <li v-for="item in items" :key="item.id">
+          <Post :name="item.owner.login" :profileImg="item.owner.avatar_url">
+            <template #content>
+              <div class="title">{{ item.name }}</div>
+              <div class="sub-title">
+                {{ item.description }}
+              </div>
+              <Socials
+                :star="item.stargazers_count"
+                :fork="item.forks_count"
+              ></Socials>
+            </template>
+          </Post>
+        </li>
+      </ul>
     </section>
   </div>
 </template>
 
 <script>
-import TopPanel from "../../components/TopPanel/TopPanel.vue"
-import MenuList from "../../components/MenuList/MenuList.vue"
-import ContactItem from "../../components/ContactItem/ContactItem.vue"
-import Post from "../../components/Post/Post.vue"
-import Socials from "../../components/Post/Socials.vue"
-import { Icon } from "../../icons"
-import contacts from "../mock/contacts.JSON"
-
+import TopPanel from "../../components/TopPanel/TopPanel.vue";
+import MenuList from "../../components/MenuList/MenuList.vue";
+import ContactItem from "../../components/ContactItem/ContactItem.vue";
+import Post from "../../components/Post/Post.vue";
+import Socials from "../../components/Post/Socials.vue";
+import { Icon } from "../../icons";
+import contacts from "../mock/contacts.JSON";
+import * as api from "../../api";
 
 export default {
-  name: 'Feeds',
+  name: "Feeds",
   components: {
     TopPanel,
     MenuList,
     Icon,
     ContactItem,
     Post,
-    Socials
+    Socials,
   },
   data() {
     return {
-      contacts
-    }
+      contacts,
+      items: [],
+    };
   },
   methods: {
     onContactClick(value) {
       console.log("click on contact", value);
+    },
+  },
+  async created() {
+    try {
+      const { data } = await api.repositories.getRepositories();
+      this.items = data.items;
+    } catch (error) {
+      console.log(error);
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped lang="scss">
 .topPanel {
   padding-top: 43px;
   padding-bottom: 33px;
-  background: #FAFAFA;
+  background: #fafafa;
   box-shadow: 0px 0.33px 0px rgba(60, 60, 67, 0.29);
 }
 
