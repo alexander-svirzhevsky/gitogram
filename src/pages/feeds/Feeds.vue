@@ -19,7 +19,14 @@
   </div>
   <div class="x-container">
     <Slider></Slider>
-    <Button>
+    <Button minWidth="200" colorSchema="green">
+      <template #default>
+        <span>
+          Follow
+        </span>
+      </template>
+    </Button>
+    <Button minWidth="400" colorSchema="grey">
       <template #default>
         <span>
           Follow
