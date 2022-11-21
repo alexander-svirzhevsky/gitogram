@@ -19,6 +19,13 @@
   </div>
   <div class="x-container">
     <Slider></Slider>
+    <Button>
+      <template #default>
+        <span>
+          Follow
+        </span>
+      </template>
+    </Button>
     <section class="section">
       <ul>
         <li v-for="item in items" :key="item.id">
@@ -44,6 +51,8 @@ import ContactItem from "../../components/ContactItem/ContactItem.vue";
 import Post from "../../components/Post/Post.vue";
 import Socials from "../../components/Post/Socials.vue";
 import Slider from "../../components/Slider/Slider.vue"
+import Button from "../../components/Button/Button.vue"
+
 import { Icon } from "../../icons";
 import contacts from "../mock/contacts.JSON";
 import * as api from "../../api";
@@ -57,7 +66,8 @@ export default {
     ContactItem,
     Post,
     Socials,
-    Slider
+    Slider,
+    Button
   },
   data() {
     return {
