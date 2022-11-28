@@ -3,7 +3,7 @@
     <div class="contact__img" @click="onContactClick(name)">
       <img :src="imgSrc" :alt="name" class="contact__avatar">
     </div>
-    <span>{{ name }}</span>
+    <span class="contact__name">{{ name }}</span>
   </div>
 </template>
 
@@ -58,5 +58,12 @@ export default {
   width: 80px;
   height: 80px;
   border-radius: 50px;
+}
+
+.contact__name {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 25px;
 }
 </style>
