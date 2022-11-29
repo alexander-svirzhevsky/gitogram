@@ -36,26 +36,6 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>
-.timeline {
-  height: 2px;
-  position: relative;
-  background: rgba(49, 174, 84, 0.3);
+<style lang="scss" scoped src="./TimeLine.scss">
 
-  &.active {
-    .indicator {
-      width: 100%;
-    }
-  }
-}
-
-.indicator {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  background: #31AE54;
-  transition: 5s;
-}
 </style>

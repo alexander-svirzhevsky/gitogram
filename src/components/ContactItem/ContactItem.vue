@@ -30,40 +30,6 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-.contact {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 92px;
-}
+<style scoped lang="scss" src="./ContactItem.scss">
 
-.contact__img {
-  width: 92px;
-  height: 92px;
-  border: 2px solid #A6328D;
-  border-radius: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-
-  &:hover {
-    border: none;
-  }
-}
-
-.contact__avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50px;
-}
-
-.contact__name {
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 25px;
-}
 </style>

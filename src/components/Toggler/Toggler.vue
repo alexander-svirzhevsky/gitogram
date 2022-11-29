@@ -28,21 +28,6 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-.toggler {
-  font-weight: 500;
-  color: #292929;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<style scoped lang="scss" src="./Toggler.scss">
 
-.toggler__text {
-  margin-right: 5px;
-}
-
-.active {
-  transform: rotate(180deg);
-  transition: 0.3 ease-out;
-}
 </style>

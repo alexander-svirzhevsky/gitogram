@@ -1,0 +1,11 @@
+.issue {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  line-height: 22px;
+  margin-bottom: 3px;
+}
+
+.issue__name {
+  font-weight: 700;
+}

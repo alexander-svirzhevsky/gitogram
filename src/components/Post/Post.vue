@@ -7,10 +7,7 @@
     <Toggler @onTogglClick="onTogglClick"></Toggler>
     <ul class="issues" v-if="shown">
       <li v-for="_ in 3">
-        <IssuesItem
-          name="joshua_l"
-          desc="Enable performance measuring in production, at the user's request"
-        >
+        <IssuesItem name="joshua_l" desc="Enable performance measuring in production, at the user's request">
         </IssuesItem>
       </li>
     </ul>
@@ -18,9 +15,9 @@
 </template>
 
 <script>
-import Profile from "./Profile.vue";
-import Toggler from "./Toggler.vue";
-import IssuesItem from "./IssuesItem.vue";
+import Profile from "../Profile/Profile.vue";
+import Toggler from "../Toggler/Toggler.vue";
+import IssuesItem from "./issuesItem/IssuesItem.vue";
 
 export default {
   name: "Post",
@@ -50,33 +47,6 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.post {
-  max-width: 980px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-bottom: 24px;
-}
+<style scoped lang="scss" src="./Post.scss">
 
-.content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 24px 20px;
-  background: #ffffff;
-  border: 1px solid #f1f1f1;
-  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.07);
-  border-radius: 10px;
-  margin-top: 16px;
-  margin-bottom: 18px;
-}
-
-.issues {
-  margin-top: 10px;
-}
 </style>

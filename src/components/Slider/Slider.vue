@@ -2,10 +2,7 @@
   <div class="slider">
     <div class="slider__header">
       <TimeLine />
-      <Profile
-        profileImg="https://picsum.photos/200/300"
-        name="React.reposit"
-      ></Profile>
+      <Profile profileImg="https://picsum.photos/200/300" name="React.reposit"></Profile>
     </div>
     <div class="slider__content">
       <slot name="content"></slot>
@@ -22,7 +19,7 @@
 
 <script>
 import TimeLine from "../TimeLine/TimeLine.vue";
-import Profile from "../Post/Profile.vue";
+import Profile from "../Profile/Profile.vue";
 import Button from "../Button/Button.vue";
 
 export default {
@@ -40,8 +37,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.slider {
-  width: 375px;
-}
+<style lang="scss" scoped src="./Slider.scss">
+
 </style>

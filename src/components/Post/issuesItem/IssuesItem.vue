@@ -23,16 +23,6 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-.issue {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  line-height: 22px;
-  margin-bottom: 3px;
-}
+<style scoped lang="scss" src="./IssuesItem.scss">
 
-.issue__name {
-  font-weight: 700;
-}
 </style>

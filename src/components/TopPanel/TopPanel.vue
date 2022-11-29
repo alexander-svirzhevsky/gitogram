@@ -14,14 +14,6 @@ export default {
 }
 </script>
   
-<style scoped lang="scss">
-.contacts {
-	margin-top: 44px;
-}
+<style scoped lang="scss" src="./TopPanel.scss">
 
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
 </style>

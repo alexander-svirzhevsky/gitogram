@@ -23,24 +23,6 @@ export default {
 
 </script>
 
-<style scoped lang="scss">
-.profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+<style scoped lang="scss" src="./Profile.scss">
 
-.profile__img {
-  width: 44px;
-  height: 44px;
-  border: 0.5px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50px;
-  margin-right: 14px;
-}
-
-.profile__name {
-  font-weight: 700;
-  font-size: 18px;
-  line-height: 18px;
-}
 </style>
