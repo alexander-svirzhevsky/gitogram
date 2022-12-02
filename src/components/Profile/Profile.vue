@@ -1,6 +1,6 @@
 <template>
   <div class="profile">
-    <img :src="profileImg" :alt="name" class="profile__img">
+    <img :src="profileImg" :alt="name" class="profile__img" :style="setStyles">
     <div class="profile__name">{{ name }}</div>
   </div>
 </template>
@@ -18,7 +18,16 @@ export default {
       type: String,
       required: true
     },
-  }
+    width: String, height: String
+  },
+  computed: {
+    setStyles() {
+      return {
+        width: `${this.width}px`,
+        height: `${this.height}px`,
+      }
+    }
+  },
 }
 
 </script>
