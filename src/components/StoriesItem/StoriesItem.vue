@@ -1,13 +1,13 @@
 <template>
-  <div class="slider">
-    <div class="slider__header">
+  <div class="slide" :class="[{ active: isActive }]">
+    <div class="slide__header">
       <TimeLine />
       <Profile profileImg="https://picsum.photos/200/300" name="React.reposit"></Profile>
     </div>
-    <div class="slider__content">
+    <div class="slide__content">
       <slot name="content"></slot>
     </div>
-    <div class="slider__footer">
+    <div class="slide__footer">
       <Button @on-btn-click="onBtnClick" minWidth="270">
         <template #default>
           <span>Follow</span>
@@ -23,7 +23,13 @@ import Profile from "../Profile/Profile.vue";
 import Button from "../Button/Button.vue";
 
 export default {
-  name: "Slider",
+  name: "StoriesItem",
+  props: {
+    isActive: {
+      type: Boolean,
+      requered: true
+    }
+  },
   components: {
     TimeLine,
     Profile,
@@ -37,6 +43,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./Slider.scss">
+<style lang="scss" scoped src="./StoriesItem.scss">
 
 </style>

@@ -48,7 +48,6 @@ import MenuList from "../../components/MenuList/MenuList.vue";
 import ContactItem from "../../components/ContactItem/ContactItem.vue";
 import Post from "../../components/Post/Post.vue";
 import Socials from "../../components/Post/socials/Socials.vue";
-import Slider from "../../components/Slider/Slider.vue";
 import Shimmer from "../../components/Shimmer/Shimmer.vue"
 import Spinner from "../../components/Spinner/Spinner.vue"
 import { Icon } from "../../icons";
@@ -62,7 +61,6 @@ export default {
     ContactItem,
     Post,
     Socials,
-    Slider,
     Shimmer,
     Spinner
   },
@@ -84,6 +82,7 @@ export default {
     }),
     onContactClick(value) {
       console.log("click on contact", value);
+      this.$router.push('/stories')
     },
     onHomeClick(value) {
       console.log(value);
@@ -101,6 +100,10 @@ export default {
 };
 
 </script>
+
+
+
+
 
 
 

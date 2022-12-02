@@ -1,0 +1,22 @@
+.section {
+  height: 100vh;
+  background-color: black;
+}
+
+.header__content {
+  padding-top: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  svg {
+    fill: white;
+    cursor: pointer;
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
