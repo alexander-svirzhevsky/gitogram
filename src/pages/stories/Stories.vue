@@ -9,65 +9,30 @@
       </div>
     </div>
     <div class="content">
-      <StoriesItem :isActive="isActive" />
+      <StoriesItem :active="active" :loading="false" :data="{}" />
     </div>
   </section>
 </template>
 
 <script>
-import { Icon } from "../../icons"
-import StoriesItem from "../../components/StoriesItem/StoriesItem.vue"
+import { Icon } from "../../icons";
+import StoriesItem from "../../components/StoriesItem/StoriesItem.vue";
 
 export default {
   name: "Stories",
   data() {
-    return { isActive: true }
+    return { active: true };
   },
   components: {
     Icon,
-    StoriesItem
+    StoriesItem,
   },
   methods: {
     onCloseClick() {
-      this.$router.push('/')
-    }
-  }
-}
-
+      this.$router.push("/");
+    },
+  },
+};
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style scoped lang="scss" src="./Stories.scss" />

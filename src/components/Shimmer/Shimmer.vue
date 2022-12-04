@@ -1,8 +1,6 @@
 <template>
   <div class="shimmer-wrapper">
-    <div :class="className">
-
-    </div>
+    <div :class="className"></div>
   </div>
 </template>
 
@@ -12,12 +10,10 @@ export default {
   props: {
     className: {
       type: String,
-      requered: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
-<style scoped lang="scss" src="./Shimmer.scss">
-
-</style>
+<style scoped lang="scss" src="./Shimmer.scss"></style>

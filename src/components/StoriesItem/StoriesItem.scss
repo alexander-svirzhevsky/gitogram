@@ -6,6 +6,13 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
+  transform: scale(0.7);
+  transition: all 0.3s ease-out;
+}
+
+.active {
+  transition: all 0.3s ease-out;
+  transform: scale(1);
 }
 
 .slide__header {
@@ -27,6 +34,13 @@
   }
 }
 
+.slide__spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 .slide__footer {
   padding: 30px;
   border-top: 1px solid #d9d1d1;
@@ -40,12 +54,33 @@
   background: #ffffff;
   width: 36.67px;
   height: 36.67px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #000000;
+
+  svg {
+    fill: #404040;
+  }
+  &:hover {
+    svg {
+      fill: #31ae54;
+    }
+  }
 }
 
 .btn-prev {
-  left: -10%;
+  left: -15%;
 }
 
 .btn-next {
-  right: -10%;
+  right: -15%;
+
+  span {
+    transform: rotateY(180deg);
+  }
+}
+
+.content {
+  padding: 18px;
 }

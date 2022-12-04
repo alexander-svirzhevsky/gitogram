@@ -6,23 +6,19 @@
 </template>
 
 <script>
-
 export default {
   name: "IssuesItem",
   props: {
     name: {
       type: String,
-      requered: true
+      required: true,
     },
     desc: {
       type: String,
-      requered: true
-    }
-  }
-}
-
+      required: true,
+    },
+  },
+};
 </script>
 
-<style scoped lang="scss" src="./IssuesItem.scss">
-
-</style>
+<style scoped lang="scss" src="./IssuesItem.scss"></style>

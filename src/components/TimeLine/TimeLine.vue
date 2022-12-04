@@ -5,37 +5,41 @@
 </template>
 
 <script>
-
 export default {
   name: "TimeLine",
   data() {
     return {
-      isActive: false
-    }
+      isActive: false,
+    };
+  },
+  props: {
+    active: Boolean,
   },
   emits: ["onFinish"],
   methods: {
     emitOnFinish() {
-      this.$emit("onFinish")
+      this.$emit("onFinish");
       console.log("onFinish");
-    }
+    },
   },
   mounted() {
     this.$nextTick(() => {
-      setTimeout(() => {
-        this.isActive = true
-      }, 0)
-    })
+      if (this.active) {
+        setTimeout(() => {
+          this.isActive = true;
+        }, 0);
+      }
+    });
 
-    this.$refs.indicator.addEventListener("transitionend", this.emitOnFinish)
+    this.$refs.indicator.addEventListener("transitionend", this.emitOnFinish);
   },
   beforeUnmount() {
-    this.$refs.indicator.removeEventListener("transitionend", this.emitOnFinish)
-  }
-}
-
+    this.$refs.indicator.removeEventListener(
+      "transitionend",
+      this.emitOnFinish
+    );
+  },
+};
 </script>
 
-<style lang="scss" scoped src="./TimeLine.scss">
-
-</style>
+<style lang="scss" scoped src="./TimeLine.scss"></style>
