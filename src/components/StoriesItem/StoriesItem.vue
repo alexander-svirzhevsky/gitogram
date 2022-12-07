@@ -2,22 +2,13 @@
   <div class="slide" :class="[{ active }]">
     <div class="slide__header">
       <TimeLine :active="active" />
-      <Profile
-        width="32"
-        height="32"
-        profileImg="https://picsum.photos/200/300"
-        name="React.reposit"
-      ></Profile>
+      <Profile width="32" height="32" :profileImg=data.userAvatar :name=data.userName></Profile>
     </div>
     <div class="slide__content">
       <div v-if="loading" class="slide__spinner">
         <Spinner />
       </div>
-      <div
-        v-if="data.content?.length"
-        v-html="data.content"
-        class="slide__data"
-      ></div>
+      <div v-if="data.content?.length" v-html="data.content" class="slide__data"></div>
       <div v-else class="content">
         <Placeholder :paragraphs="2" />
       </div>
@@ -30,12 +21,12 @@
       </Button>
     </div>
     <template v-if="active">
-      <button class="btn btn-prev">
+      <button class="btn btn-prev" @click="onPrevClick">
         <span class="icon">
           <Icon name="ArrowBtn" />
         </span>
       </button>
-      <button class="btn btn-next">
+      <button class="btn btn-next" @click="onNextClick">
         <span class="icon">
           <Icon name="ArrowBtn" />
         </span>
@@ -63,6 +54,7 @@ export default {
       default: () => ({}),
     },
   },
+  emits: ["onPrevClick", "onNextClick"],
   components: {
     TimeLine,
     Profile,
@@ -75,8 +67,16 @@ export default {
     onBtnClick(value) {
       console.log("value: ", value);
     },
+    onPrevClick() {
+      this.$emit("onPrevClick")
+    },
+    onNextClick() {
+      this.$emit("onNextClick")
+    }
   },
 };
 </script>
 
-<style lang="scss" scoped src="./StoriesItem.scss"></style>
+<style lang="scss" scoped src="./StoriesItem.scss">
+
+</style>
