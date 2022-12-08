@@ -10,7 +10,7 @@
     </div>
     <div class="content">
       <div class="stories-container">
-        <ul class="stories">
+        <ul class="stories" ref="slider">
           <li class="stories__item" v-for="(repository, index) in repositories" :key="repository.id">
             <StoriesItem :data="getStoryData(repository)" :active="(slideIndex === index)"
               @on-prev-click="hadleSlide(index - 1)" @on-next-click="hadleSlide(index + 1)" :loading="false" />
@@ -61,7 +61,27 @@ export default {
       }
     },
     hadleSlide(index) {
-      console.log(index);
+      const sliderElement = this.$refs["slider"]
+
+      const style = getComputedStyle(sliderElement)
+      const matrix = style.transform
+      const matrixType = matrix.includes('3d') ? '3d' : '2d'
+      // console.log(matrix);
+      const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
+      let x, y
+      if (matrixType === '2d') {
+        x = matrixValues[4]
+        y = matrixValues[5]
+      }
+      console.log(x);
+
+      if (this.slideIndex < index) {
+        sliderElement.style.transform = `translateX(-${375 * index}px)`
+      } else {
+        console.log("here");
+        sliderElement.style.transform = `translateX(-${parseInt(x)}px)`
+      }
+      this.slideIndex = index
     }
   },
   created() {
@@ -69,6 +89,82 @@ export default {
   }
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
