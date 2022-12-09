@@ -11,7 +11,7 @@
     <div class="content">
       <div class="stories-container">
         <ul class="stories" ref="slider">
-          <li class="stories__item" v-for="(repository, index) in repositories" :key="repository.id">
+          <li ref="slider-item" class="stories__item" v-for="(repository, index) in repositories" :key="repository.id">
             <StoriesItem :data="getStoryData(repository)" :active="(slideIndex === index)"
               @on-prev-click="hadleSlide(index - 1)" @on-next-click="hadleSlide(index + 1)" :loading="false" />
           </li>
@@ -62,25 +62,10 @@ export default {
     },
     hadleSlide(index) {
       const sliderElement = this.$refs["slider"]
+      const sliderItem = this.$refs["slider-item"]
 
-      const style = getComputedStyle(sliderElement)
-      const matrix = style.transform
-      const matrixType = matrix.includes('3d') ? '3d' : '2d'
-      // console.log(matrix);
-      const matrixValues = matrix.match(/matrix.*\((.+)\)/)[1].split(', ')
-      let x, y
-      if (matrixType === '2d') {
-        x = matrixValues[4]
-        y = matrixValues[5]
-      }
-      console.log(x);
-
-      if (this.slideIndex < index) {
-        sliderElement.style.transform = `translateX(-${375 * index}px)`
-      } else {
-        console.log("here");
-        sliderElement.style.transform = `translateX(-${parseInt(x)}px)`
-      }
+      const slideWidth = parseInt(getComputedStyle(sliderItem[0]).width.replace(/[\D]+/g, ''))
+      sliderElement.style.transform = `translateX(-${slideWidth * index}px)`
       this.slideIndex = index
     }
   },
@@ -89,6 +74,48 @@ export default {
   }
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
