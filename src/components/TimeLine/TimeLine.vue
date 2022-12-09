@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ active: isActive }" class="timeline">
+  <div :class="{ active: active }" class="timeline">
     <div ref="indicator" class="indicator"></div>
   </div>
 </template>
@@ -7,11 +7,6 @@
 <script>
 export default {
   name: "TimeLine",
-  data() {
-    return {
-      isActive: false,
-    };
-  },
   props: {
     active: Boolean,
   },
@@ -23,13 +18,6 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      if (this.active) {
-        setTimeout(() => {
-          this.isActive = true;
-        }, 0);
-      }
-    });
 
     this.$refs.indicator.addEventListener("transitionend", this.emitOnFinish);
   },
@@ -42,4 +30,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./TimeLine.scss"></style>
+<style lang="scss" scoped src="./TimeLine.scss">
+
+</style>

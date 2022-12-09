@@ -1,7 +1,7 @@
 <template>
   <div class="slide" :class="[{ active }]">
     <div class="slide__header">
-      <TimeLine :active="active" />
+      <TimeLine :active=active />
       <Profile width="32" height="32" :profileImg=data.userAvatar :name=data.userName></Profile>
     </div>
     <div class="slide__content">
@@ -53,6 +53,7 @@ export default {
       required: true,
       default: () => ({}),
     },
+
   },
   emits: ["onPrevClick", "onNextClick"],
   components: {
@@ -75,6 +76,7 @@ export default {
     }
   },
 };
+
 </script>
 
 <style lang="scss" scoped src="./StoriesItem.scss">
