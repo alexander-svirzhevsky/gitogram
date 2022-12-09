@@ -21,12 +21,12 @@
       </Button>
     </div>
     <template v-if="active">
-      <button class="btn btn-prev" @click="onPrevClick">
+      <button v-if="btnsShown.includes('prev')" class="btn btn-prev" @click="onPrevClick">
         <span class="icon">
           <Icon name="ArrowBtn" />
         </span>
       </button>
-      <button class="btn btn-next" @click="onNextClick">
+      <button v-if="btnsShown.includes('next')" class="btn btn-next" @click="onNextClick">
         <span class="icon">
           <Icon name="ArrowBtn" />
         </span>
@@ -53,7 +53,13 @@ export default {
       required: true,
       default: () => ({}),
     },
-
+    btnsShown: {
+      type: Array,
+      default: () => ["prev", "next"],
+      validator(value) {
+        return value.every(val => val === 'prev' || val === 'next')
+      }
+    }
   },
   emits: ["onPrevClick", "onNextClick"],
   components: {

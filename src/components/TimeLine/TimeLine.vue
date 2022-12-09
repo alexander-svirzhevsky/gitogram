@@ -18,7 +18,6 @@ export default {
     },
   },
   mounted() {
-
     this.$refs.indicator.addEventListener("transitionend", this.emitOnFinish);
   },
   beforeUnmount() {

@@ -13,7 +13,8 @@
         <ul class="stories" ref="slider">
           <li ref="slider-item" class="stories__item" v-for="(repository, index) in repositories" :key="repository.id">
             <StoriesItem :data="getStoryData(repository)" :active="(slideIndex === index)"
-              @on-prev-click="hadleSlide(index - 1)" @on-next-click="hadleSlide(index + 1)" :loading="false" />
+              @on-prev-click="hadleSlide(index - 1)" @on-next-click="hadleSlide(index + 1)" :btnsShown="activeBtns"
+              :loading="false" />
           </li>
         </ul>
       </div>
@@ -40,6 +41,11 @@ export default {
       loading: state => state.repositories.loading,
       error: state => state.repositories.error
     }),
+    activeBtns() {
+      if (this.slideIndex === 0) return ["next"]
+      if (this.slideIndex === this.repositories.length - 1) return ["prev"]
+      return ["prev", "next"]
+    }
   },
   components: {
     Icon,
@@ -74,6 +80,26 @@ export default {
   }
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
