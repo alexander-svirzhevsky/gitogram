@@ -11,10 +11,20 @@
     <div class="content">
       <div class="stories-container">
         <ul class="stories" ref="slider">
-          <li ref="slider-item" class="stories__item" v-for="(repository, index) in repositories" :key="repository.id">
-            <StoriesItem :data="getStoryData(repository)" :active="(slideIndex === index)"
-              @on-prev-click="hadleSlide(index - 1)" @on-next-click="hadleSlide(index + 1)" :btnsShown="activeBtns"
-              :loading="false" />
+          <li
+            ref="slider-item"
+            class="stories__item"
+            v-for="(repository, index) in repositories"
+            :key="repository.id"
+          >
+            <StoriesItem
+              :data="getStoryData(repository)"
+              :active="slideIndex === index"
+              :btnsShown="activeBtns"
+              :loading="false"
+              @on-prev-click="hadleSlide(index - 1)"
+              @on-next-click="hadleSlide(index + 1)"
+            />
           </li>
         </ul>
       </div>
@@ -32,20 +42,20 @@ export default {
   name: "Stories",
   data() {
     return {
-      slideIndex: 0
+      slideIndex: 0,
     };
   },
   computed: {
     ...mapState({
-      repositories: state => state.repositories.data,
-      loading: state => state.repositories.loading,
-      error: state => state.repositories.error
+      repositories: (state) => state.repositories.data,
+      loading: (state) => state.repositories.loading,
+      error: (state) => state.repositories.error,
     }),
     activeBtns() {
-      if (this.slideIndex === 0) return ["next"]
-      if (this.slideIndex === this.repositories.length - 1) return ["prev"]
-      return ["prev", "next"]
-    }
+      if (this.slideIndex === 0) return ["next"];
+      if (this.slideIndex === this.repositories.length - 1) return ["prev"];
+      return ["prev", "next"];
+    },
   },
   components: {
     Icon,
@@ -53,7 +63,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      getRepositories: "repositories/getRepositories"
+      getRepositories: "repositories/getRepositories",
     }),
     onCloseClick() {
       this.$router.push("/");
@@ -63,214 +73,24 @@ export default {
         id: obj.id,
         userAvatar: obj.owner?.avatar_url,
         userName: obj.owner?.login,
-        content: obj.readme
-      }
+        content: obj.readme,
+      };
     },
     hadleSlide(index) {
-      const sliderElement = this.$refs["slider"]
-      const sliderItem = this.$refs["slider-item"]
+      const sliderElement = this.$refs["slider"];
+      const sliderItem = this.$refs["slider-item"];
 
-      const slideWidth = parseInt(getComputedStyle(sliderItem[0]).width.replace(/[\D]+/g, ''))
-      sliderElement.style.transform = `translateX(-${slideWidth * index}px)`
-      this.slideIndex = index
-    }
+      const slideWidth = parseInt(
+        getComputedStyle(sliderItem[0]).width.replace(/[\D]+/g, "")
+      );
+      sliderElement.style.transform = `translateX(-${slideWidth * index}px)`;
+      this.slideIndex = index;
+    },
   },
   created() {
-    this.getRepositories()
-  }
+    this.getRepositories();
+  },
 };
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style scoped lang="scss" src="./Stories.scss" />
