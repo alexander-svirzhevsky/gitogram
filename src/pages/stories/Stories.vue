@@ -11,20 +11,10 @@
     <div class="content">
       <div class="stories-container">
         <ul class="stories" ref="slider">
-          <li
-            ref="slider-item"
-            class="stories__item"
-            v-for="(repository, index) in repositories"
-            :key="repository.id"
-          >
-            <StoriesItem
-              :data="getStoryData(repository)"
-              :active="slideIndex === index"
-              :btnsShown="activeBtns"
-              :loading="false"
-              @on-prev-click="hadleSlide(index - 1)"
-              @on-next-click="hadleSlide(index + 1)"
-            />
+          <li ref="slider-item" class="stories__item" v-for="(repository, index) in repositories" :key="repository.id">
+            <StoriesItem :data="getStoryData(repository)" :active="slideIndex === index" :btnsShown="activeBtns"
+              :loading="loading && slideIndex === index" :displayBtns="displayBtns"
+              @on-prev-click="hadleSlide(index - 1)" @on-next-click="hadleSlide(index + 1)" />
           </li>
         </ul>
       </div>
@@ -38,11 +28,14 @@ import { mapActions, mapState } from "vuex";
 import { Icon } from "../../icons";
 import StoriesItem from "../../components/StoriesItem/StoriesItem.vue";
 
+
+
 export default {
   name: "Stories",
   data() {
     return {
       slideIndex: 0,
+      displayBtns: true
     };
   },
   computed: {
@@ -64,9 +57,14 @@ export default {
   methods: {
     ...mapActions({
       getRepositories: "repositories/getRepositories",
+      getReadme: "repositories/getReadme"
     }),
     onCloseClick() {
       this.$router.push("/");
+    },
+    async fetchReadmeForActive() {
+      const { id, owner, name } = this.repositories[this.slideIndex]
+      await this.getReadme({ id, owner: owner.login, repo: name })
     },
     getStoryData(obj) {
       return {
@@ -76,7 +74,7 @@ export default {
         content: obj.readme,
       };
     },
-    hadleSlide(index) {
+    moveSlide(index) {
       const sliderElement = this.$refs["slider"];
       const sliderItem = this.$refs["slider-item"];
 
@@ -86,11 +84,73 @@ export default {
       sliderElement.style.transform = `translateX(-${slideWidth * index}px)`;
       this.slideIndex = index;
     },
+    async hadleSlide(index) {
+      this.moveSlide(index)
+      await this.fetchReadmeForActive()
+    },
   },
-  created() {
-    this.getRepositories();
+  async created() {
+    console.log(this.repositories[this.slideIndex]);
+    await this.getRepositories();
+    await this.fetchReadmeForActive()
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style scoped lang="scss" src="./Stories.scss" />

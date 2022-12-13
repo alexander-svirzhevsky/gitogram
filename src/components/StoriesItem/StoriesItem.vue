@@ -8,7 +8,7 @@
       <div v-if="loading" class="slide__spinner">
         <Spinner />
       </div>
-      <div v-if="data.content?.length" v-html="data.content" class="slide__data"></div>
+      <div v-if="data.content?.length" v-html="data.content" class="content"></div>
       <div v-else class="content">
         <Placeholder :paragraphs="2" />
       </div>
@@ -20,7 +20,7 @@
         </template>
       </Button>
     </div>
-    <template v-if="active">
+    <template v-if="active && displayBtns">
       <button v-if="btnsShown.includes('prev')" class="btn btn-prev" @click="onPrevClick">
         <span class="icon">
           <Icon name="ArrowBtn" />
@@ -48,6 +48,7 @@ export default {
   props: {
     active: Boolean,
     loading: Boolean,
+    displayBtns: Boolean,
     data: {
       type: Object,
       required: true,

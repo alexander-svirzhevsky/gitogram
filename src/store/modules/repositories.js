@@ -3,6 +3,7 @@ import {
   UPDATE_REPOSITORIES,
   SET_LOADING,
   SET_ERROR,
+  SET_README,
 } from "../types/mutation-types";
 
 export default {
@@ -12,7 +13,11 @@ export default {
     error: "",
     loading: false,
   },
-  getters: {},
+  getters: {
+    getRepositorieById: (state) => (id) => {
+      return state.data.find((item) => item.id === id);
+    },
+  },
   mutations: {
     [UPDATE_REPOSITORIES](state, payload) {
       state.data = payload;
@@ -23,6 +28,14 @@ export default {
     [SET_ERROR](state, payload) {
       state.error = payload;
     },
+    [SET_README](state, payload) {
+      state.data = state.data.map((repo) => {
+        if (payload.id === repo.id) {
+          repo.readme = payload.content;
+        }
+        return repo;
+      });
+    },
   },
   actions: {
     async getRepositories({ commit }) {
@@ -32,6 +45,21 @@ export default {
         commit(UPDATE_REPOSITORIES, data.items);
       } catch (error) {
         commit(SET_ERROR, error.message);
+      } finally {
+        commit(SET_LOADING, false);
+      }
+    },
+    async getReadme({ commit, getters }, { id, owner, repo }) {
+      const curRepo = getters.getRepositorieById(id);
+
+      if (curRepo.readme !== undefined) return;
+
+      try {
+        commit(SET_LOADING, true);
+        const { data } = await api.readme.getReadme({ owner, repo });
+        console.log(data);
+        commit(SET_README, { id, content: data });
+      } catch (error) {
       } finally {
         commit(SET_LOADING, false);
       }
