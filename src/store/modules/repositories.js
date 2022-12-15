@@ -57,7 +57,6 @@ export default {
       try {
         commit(SET_LOADING, true);
         const { data } = await api.readme.getReadme({ owner, repo });
-        console.log(data);
         commit(SET_README, { id, content: data });
       } catch (error) {
       } finally {

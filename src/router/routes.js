@@ -3,5 +3,5 @@ import Stories from "../pages/stories/Stories.vue";
 
 export default [
   { path: "/", component: Feeds },
-  { path: "/stories", component: Stories },
+  { path: "/stories/:initialSlide", component: Stories, name: "stories" },
 ];

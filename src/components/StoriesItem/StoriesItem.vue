@@ -1,14 +1,23 @@
 <template>
   <div class="slide" :class="[{ active }]">
     <div class="slide__header">
-      <TimeLine :active=active />
-      <Profile width="32" height="32" :profileImg=data.userAvatar :name=data.userName></Profile>
+      <TimeLine :active="active" />
+      <Profile
+        width="32"
+        height="32"
+        :profileImg="data.userAvatar"
+        :name="data.userName"
+      ></Profile>
     </div>
     <div class="slide__content">
       <div v-if="loading" class="slide__spinner">
         <Spinner />
       </div>
-      <div v-if="data.content?.length" v-html="data.content" class="content"></div>
+      <div
+        v-if="data.content?.length"
+        v-html="data.content"
+        class="content"
+      ></div>
       <div v-else class="content">
         <Placeholder :paragraphs="2" />
       </div>
@@ -21,12 +30,20 @@
       </Button>
     </div>
     <template v-if="active && displayBtns">
-      <button v-if="btnsShown.includes('prev')" class="btn btn-prev" @click="onPrevClick">
+      <button
+        v-if="btnsShown.includes('prev')"
+        class="btn btn-prev"
+        @click="onPrevClick"
+      >
         <span class="icon">
           <Icon name="ArrowBtn" />
         </span>
       </button>
-      <button v-if="btnsShown.includes('next')" class="btn btn-next" @click="onNextClick">
+      <button
+        v-if="btnsShown.includes('next')"
+        class="btn btn-next"
+        @click="onNextClick"
+      >
         <span class="icon">
           <Icon name="ArrowBtn" />
         </span>
@@ -58,9 +75,10 @@ export default {
       type: Array,
       default: () => ["prev", "next"],
       validator(value) {
-        return value.every(val => val === 'prev' || val === 'next')
-      }
-    }
+        return value.every((val) => val === "prev" || val === "next");
+      },
+    },
+    initialSlide: Number,
   },
   emits: ["onPrevClick", "onNextClick"],
   components: {
@@ -76,16 +94,13 @@ export default {
       console.log("value: ", value);
     },
     onPrevClick() {
-      this.$emit("onPrevClick")
+      this.$emit("onPrevClick");
     },
     onNextClick() {
-      this.$emit("onNextClick")
-    }
+      this.$emit("onNextClick");
+    },
   },
 };
-
 </script>
 
-<style lang="scss" scoped src="./StoriesItem.scss">
-
-</style>
+<style lang="scss" scoped src="./StoriesItem.scss"></style>

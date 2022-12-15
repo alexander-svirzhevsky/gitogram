@@ -11,10 +11,21 @@
     <div class="content">
       <div class="stories-container">
         <ul class="stories" ref="slider">
-          <li ref="slider-item" class="stories__item" v-for="(repository, index) in repositories" :key="repository.id">
-            <StoriesItem :data="getStoryData(repository)" :active="slideIndex === index" :btnsShown="activeBtns"
-              :loading="loading && slideIndex === index" :displayBtns="displayBtns"
-              @on-prev-click="hadleSlide(index - 1)" @on-next-click="hadleSlide(index + 1)" />
+          <li
+            ref="slider-item"
+            class="stories__item"
+            v-for="(repository, index) in repositories"
+            :key="repository.id"
+          >
+            <StoriesItem
+              :data="getStoryData(repository)"
+              :active="slideIndex === index"
+              :btnsShown="activeBtns"
+              :loading="loading && slideIndex === index"
+              :displayBtns="displayBtns"
+              @on-prev-click="hadleSlide(index - 1)"
+              @on-next-click="hadleSlide(index + 1)"
+            />
           </li>
         </ul>
       </div>
@@ -28,14 +39,13 @@ import { mapActions, mapState } from "vuex";
 import { Icon } from "../../icons";
 import StoriesItem from "../../components/StoriesItem/StoriesItem.vue";
 
-
-
 export default {
   name: "Stories",
   data() {
     return {
       slideIndex: 0,
-      displayBtns: true
+      displayBtns: true,
+      initialSlide: this.$route?.params?.initialSlide,
     };
   },
   computed: {
@@ -57,14 +67,14 @@ export default {
   methods: {
     ...mapActions({
       getRepositories: "repositories/getRepositories",
-      getReadme: "repositories/getReadme"
+      getReadme: "repositories/getReadme",
     }),
     onCloseClick() {
       this.$router.push("/");
     },
     async fetchReadmeForActive() {
-      const { id, owner, name } = this.repositories[this.slideIndex]
-      await this.getReadme({ id, owner: owner.login, repo: name })
+      const { id, owner, name } = this.repositories[this.slideIndex];
+      await this.getReadme({ id, owner: owner.login, repo: name });
     },
     getStoryData(obj) {
       return {
@@ -85,72 +95,23 @@ export default {
       this.slideIndex = index;
     },
     async hadleSlide(index) {
-      this.moveSlide(index)
-      await this.fetchReadmeForActive()
+      this.moveSlide(index);
+      await this.fetchReadmeForActive();
     },
   },
-  async created() {
-    console.log(this.repositories[this.slideIndex]);
+  async mounted() {
     await this.getRepositories();
-    await this.fetchReadmeForActive()
+    if (this.initialSlide) {
+      console.log("this.initialSlide: ", this.initialSlide);
+      const ndx = this.repositories.findIndex(
+        (repo) => repo.id === this.initialSlide
+      );
+      console.log("ndx: ", ndx);
+      // this.moveSlide(ndx);
+    }
+    await this.fetchReadmeForActive();
   },
 };
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style scoped lang="scss" src="./Stories.scss" />
