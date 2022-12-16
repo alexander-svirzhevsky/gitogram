@@ -1,7 +1,7 @@
 <template>
   <div class="slide" :class="[{ active }]">
     <div class="slide__header">
-      <TimeLine :active="active" />
+      <TimeLine :active="active" @onFinish="$emit('onTimeLineFinish')" />
       <Profile
         width="32"
         height="32"
@@ -80,7 +80,7 @@ export default {
     },
     initialSlide: Number,
   },
-  emits: ["onPrevClick", "onNextClick"],
+  emits: ["onPrevClick", "onNextClick", "onTimeLineFinish"],
   components: {
     TimeLine,
     Profile,

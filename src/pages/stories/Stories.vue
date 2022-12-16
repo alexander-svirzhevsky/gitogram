@@ -25,6 +25,7 @@
               :displayBtns="displayBtns"
               @on-prev-click="hadleSlide(index - 1)"
               @on-next-click="hadleSlide(index + 1)"
+              @onTimeLineFinish="hadleSlide(index + 1)"
             />
           </li>
         </ul>
@@ -95,8 +96,13 @@ export default {
       this.slideIndex = index;
     },
     async hadleSlide(index) {
-      this.moveSlide(index);
-      await this.fetchReadmeForActive();
+      if (index >= this.repositories.length) {
+        this.moveSlide(0);
+        await this.fetchReadmeForActive();
+      } else {
+        this.moveSlide(index);
+        await this.fetchReadmeForActive();
+      }
     },
   },
   async mounted() {
@@ -104,10 +110,9 @@ export default {
     if (this.initialSlide) {
       console.log("this.initialSlide: ", this.initialSlide);
       const ndx = this.repositories.findIndex(
-        (repo) => repo.id === this.initialSlide
+        (repo) => repo.id === Number(this.initialSlide)
       );
-      console.log("ndx: ", ndx);
-      // this.moveSlide(ndx);
+      this.moveSlide(ndx);
     }
     await this.fetchReadmeForActive();
   },

@@ -14,7 +14,6 @@ export default {
   methods: {
     emitOnFinish() {
       this.$emit("onFinish");
-      console.log("onFinish");
     },
   },
   mounted() {
@@ -29,6 +28,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./TimeLine.scss">
-
-</style>
+<style lang="scss" scoped src="./TimeLine.scss"></style>
