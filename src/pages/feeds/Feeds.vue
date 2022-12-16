@@ -95,8 +95,6 @@ export default {
       getRepositories: "repositories/getRepositories",
     }),
     onContactClick(value) {
-      console.log("click on contact", value);
-      // this.$router.push("stories");
       this.$router.push({ name: "stories", params: { initialSlide: value } });
     },
     onHomeClick(value) {

@@ -44,7 +44,7 @@ export default {
   name: "Stories",
   data() {
     return {
-      slideIndex: 0,
+      slideIndex: null,
       displayBtns: true,
       initialSlide: this.$route?.params?.initialSlide,
     };
@@ -108,7 +108,6 @@ export default {
   async mounted() {
     await this.getRepositories();
     if (this.initialSlide) {
-      console.log("this.initialSlide: ", this.initialSlide);
       const ndx = this.repositories.findIndex(
         (repo) => repo.id === Number(this.initialSlide)
       );
