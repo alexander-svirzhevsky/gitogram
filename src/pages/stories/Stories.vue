@@ -42,11 +42,11 @@ import StoriesItem from "../../components/StoriesItem/StoriesItem.vue";
 
 export default {
   name: "Stories",
+  props: ["initialSlide"],
   data() {
     return {
       slideIndex: null,
       displayBtns: true,
-      initialSlide: this.$route?.params?.initialSlide,
     };
   },
   computed: {
