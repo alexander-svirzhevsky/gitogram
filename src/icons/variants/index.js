@@ -6,3 +6,5 @@ export { default as Fork } from "./Fork.vue";
 export { default as Arrow } from "./Arrow.vue";
 export { default as ArrowBtn } from "./ArrowBtn.vue";
 export { default as Cross } from "./Cross.vue";
+export { default as GitHub } from "./GitHub.vue";
+export { default as LapTop } from "./LapTop.vue";

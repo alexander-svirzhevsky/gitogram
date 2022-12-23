@@ -1,0 +1,36 @@
+.button-content {
+  display: flex;
+}
+
+.btn-text {
+  margin-right: 12px;
+}
+
+.content {
+  height: 100vh;
+}
+
+.img {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  bottom: 0;
+  transform: translateY(-50%);
+  height: 635px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  width: 256px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.logo {
+  margin-bottom: 24px;
+}
+
+.desc {
+  margin-bottom: 54px;
+}

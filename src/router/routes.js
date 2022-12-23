@@ -1,6 +1,7 @@
 import Feeds from "../pages/feeds/Feeds.vue";
 import Stories from "../pages/stories/Stories.vue";
 import NotFound from "../pages/404/NotFound.vue";
+import Auth from "../pages/auth/Auth.vue";
 
 export default [
   {
@@ -16,5 +17,9 @@ export default [
   {
     path: "/:pathMatch(.*)*",
     component: NotFound,
+  },
+  {
+    path: "/auth",
+    component: Auth,
   },
 ];

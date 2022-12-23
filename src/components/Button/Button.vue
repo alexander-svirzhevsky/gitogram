@@ -1,5 +1,10 @@
 <template>
-  <button @click="onClick" :style="setStyles" :class="colorSchema" class="button">
+  <button
+    @click="onClick"
+    :style="setStyles"
+    :class="colorSchema"
+    class="button"
+  >
     <slot></slot>
   </button>
 </template>
@@ -27,6 +32,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped src="./Button.scss">
-
-</style>
+<style lang="scss" scoped src="./Button.scss"></style>
