@@ -25,6 +25,13 @@
   width: 256px;
   justify-content: center;
   align-items: flex-start;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.desc__text {
+  display: block;
 }
 
 .logo {
@@ -33,4 +40,7 @@
 
 .desc {
   margin-bottom: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
