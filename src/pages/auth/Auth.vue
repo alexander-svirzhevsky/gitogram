@@ -24,11 +24,14 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
+
 import { Icon } from "../../icons";
 import Button from "../../components/Button/Button.vue";
 import env from "../../../env";
 
 export default {
+  namespaced: true,
   name: "Auth",
   components: {
     Icon,
@@ -37,7 +40,15 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    // ...mapState({
+    //   token: (state) => state.authorisation.token,
+    // }),
+  },
   methods: {
+    // ...mapActions({
+    //   getToken: "authorisation/getToken",
+    // }),
     getCode() {
       const githubAuthApi = "https://github.com/login/oauth/authorize";
 
@@ -54,26 +65,28 @@ export default {
 
     if (code) {
       try {
-        const response = await fetch(
-          "https://webdev-api.loftschool.com/github",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              clientId: env.CLIENT_ID,
-              code,
-              clientSecret: env.CLIENT_SECRET,
-            }),
-          }
-        );
-
-        const { token } = await response.json();
-
-        localStorage.setItem("token", token);
-        this.$router.replace({ name: "feeds" });
+        this.getToken(code);
         console.log(token);
+        // const response = await fetch(
+        //   "https://webdev-api.loftschool.com/github",
+        //   {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       clientId: env.CLIENT_ID,
+        //       code,
+        //       clientSecret: env.CLIENT_SECRET,
+        //     }),
+        //   }
+        // );
+
+        // const { token } = await response.json();
+
+        // localStorage.setItem("token", token);
+        // this.$router.replace({ name: "feeds" });
+        // console.log(token);
       } catch (error) {}
     }
   },
