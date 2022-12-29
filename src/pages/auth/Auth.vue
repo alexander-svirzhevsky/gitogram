@@ -24,11 +24,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
 
+import * as api from "../../api"
 import { Icon } from "../../icons";
 import Button from "../../components/Button/Button.vue";
 import env from "../../../env";
+import axios from "axios";
 
 export default {
   namespaced: true,
@@ -40,15 +41,7 @@ export default {
   data() {
     return {};
   },
-  computed: {
-    // ...mapState({
-    //   token: (state) => state.authorisation.token,
-    // }),
-  },
   methods: {
-    // ...mapActions({
-    //   getToken: "authorisation/getToken",
-    // }),
     getCode() {
       const githubAuthApi = "https://github.com/login/oauth/authorize";
 
@@ -65,32 +58,72 @@ export default {
 
     if (code) {
       try {
-        this.getToken(code);
-        console.log(token);
-        // const response = await fetch(
-        //   "https://webdev-api.loftschool.com/github",
-        //   {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       clientId: env.CLIENT_ID,
-        //       code,
-        //       clientSecret: env.CLIENT_SECRET,
-        //     }),
-        //   }
-        // );
+        const { data: { token } } = await api.auth.getToken({ code })
 
-        // const { token } = await response.json();
+        api.auth.setToken(token, true)
 
-        // localStorage.setItem("token", token);
-        // this.$router.replace({ name: "feeds" });
-        // console.log(token);
-      } catch (error) {}
+        this.$router.replace({ name: "feeds" });
+      } catch (error) {
+        console.log(error);
+      }
     }
+
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style lang="scss" scoped src="./Auth.scss" />
