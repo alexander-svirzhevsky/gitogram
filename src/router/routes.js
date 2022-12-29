@@ -22,5 +22,6 @@ export default [
   {
     path: "/auth",
     component: Auth,
+    name: "auth",
   },
 ];

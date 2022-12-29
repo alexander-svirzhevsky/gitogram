@@ -29,7 +29,7 @@ import * as api from "../../api"
 import { Icon } from "../../icons";
 import Button from "../../components/Button/Button.vue";
 import env from "../../../env";
-import axios from "axios";
+import { mapActions, mapState } from "vuex";
 
 export default {
   namespaced: true,
@@ -41,7 +41,15 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    ...mapState({
+      user: (state) => state.user.user
+    })
+  },
   methods: {
+    ...mapActions({
+      getUser: "user/getUserData"
+    }),
     getCode() {
       const githubAuthApi = "https://github.com/login/oauth/authorize";
 
@@ -61,7 +69,7 @@ export default {
         const { data: { token } } = await api.auth.getToken({ code })
 
         api.auth.setToken(token, true)
-
+        console.log("here");
         this.$router.replace({ name: "feeds" });
       } catch (error) {
         console.log(error);
@@ -71,6 +79,32 @@ export default {
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
