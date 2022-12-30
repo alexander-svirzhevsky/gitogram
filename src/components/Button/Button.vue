@@ -1,35 +1,42 @@
 <template>
-  <button
-    @click="onClick"
-    :style="setStyles"
-    :class="colorSchema"
-    class="button"
-  >
-    <slot></slot>
+  <button :disabled="loading" @click="onClick" :style="setStyles" :class="[color, { loading: loading }, 'button']">
+    <Loader v-if="loading"></Loader>
+    <slot v-else></slot>
   </button>
 </template>
 
 <script>
+import Loader from "../Loader/Loader.vue"
+
+const buttonColors = {
+  grey: "#9E9E9E",
+  green: "#31AE54"
+}
+
 export default {
   name: "Button",
-  props: {
-    colorSchema: String,
-    minWidth: String,
+  components: {
+    Loader
   },
-  computed: {
-    setStyles() {
-      return {
-        minWidth: `${this.minWidth}px`,
-        background: `${this.colorSchema === "grey" ? "#9E9E9E" : "#31AE54"}`,
-      };
-    },
+  props: {
+    loading: Boolean,
+    minWidth: String,
+    color: {
+      type: String,
+      required: true,
+      validator(value) {
+        return Object.keys(buttonColors).includes(value)
+      }
+    }
   },
   methods: {
     onClick() {
-      this.$emit("onBtnClick", "on follow click");
+      this.$emit("onBtnClick");
     },
   },
 };
 </script>
 
-<style lang="scss" scoped src="./Button.scss"></style>
+<style lang="scss" scoped src="./Button.scss">
+
+</style>

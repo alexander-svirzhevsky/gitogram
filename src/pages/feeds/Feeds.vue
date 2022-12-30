@@ -17,6 +17,15 @@
           </ul>
         </template>
       </TopPanel>
+      <Button loading color="green">
+        primary button
+      </Button>
+      <Button color="grey">
+        primary button
+      </Button>
+      <Button color="green">
+        Follow
+      </Button>
     </div>
   </div>
   <div class="x-container">
@@ -52,6 +61,7 @@ import Socials from "../../components/Post/socials/Socials.vue";
 import Shimmer from "../../components/Shimmer/Shimmer.vue";
 import Spinner from "../../components/Spinner/Spinner.vue";
 import { Icon } from "../../icons";
+import Button from "../../components/Button/Button.vue"
 
 export default {
   name: "Feeds",
@@ -64,6 +74,7 @@ export default {
     Socials,
     Shimmer,
     Spinner,
+    Button
   },
   data() {
     return {
@@ -104,6 +115,28 @@ export default {
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
