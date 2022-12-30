@@ -24,17 +24,15 @@ router.beforeEach(async (to, from, next) => {
 
   const isLogged = store.getters["user/isLogged"];
 
-  console.log(isLogged);
-  next();
-  // if (isLogged && to.name !== "auth") {
-  //   next();
-  // } else if (isLogged && to.name === "auth") {
-  //   next({ name: "feeds" });
-  // } else if (!isLogged && to.name === "auth") {
-  //   next();
-  // } else {
-  //   next({ name: "auth" });
-  // }
+  if (isLogged && to.name !== "auth") {
+    next();
+  } else if (isLogged && to.name === "auth") {
+    next({ name: "feeds" });
+  } else if (!isLogged && to.name === "auth") {
+    next();
+  } else {
+    next({ name: "auth" });
+  }
 });
 
 export default router;

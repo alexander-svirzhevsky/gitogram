@@ -8,7 +8,7 @@ export default {
   },
   getters: {
     isLogged(state) {
-      return state.user !== null && !Object.keys(state.user).length;
+      return state.user !== null && !!Object.keys(state.user).length;
     },
   },
   mutations: {
