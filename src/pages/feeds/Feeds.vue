@@ -4,24 +4,14 @@
       <TopPanel>
         <template #header>
           <Icon name="Logo"></Icon>
-          <MenuList
-            @on-home-click="onHomeClick"
-            @on-profile-click="onProfileClick"
-            @on-sign-out-click="onSignOutClick"
-          />
+          <MenuList :avatar="user.avatar_url" @on-home-click="onHomeClick" @on-profile-click="onProfileClick"
+            @on-sign-out-click="onSignOutClick" />
         </template>
         <template #contacts>
           <ul class="contacts__list">
-            <li
-              class="contacts__item"
-              v-for="contact in repositories"
-              :key="contact.id"
-            >
-              <ContactItem
-                :imgSrc="contact.owner.avatar_url"
-                :name="contact.name"
-                @on-contact-click="onContactClick(contact.id)"
-              >
+            <li class="contacts__item" v-for="contact in repositories" :key="contact.id">
+              <ContactItem :imgSrc="contact.owner.avatar_url" :name="contact.name"
+                @on-contact-click="onContactClick(contact.id)">
               </ContactItem>
             </li>
           </ul>
@@ -33,18 +23,15 @@
     <section class="section">
       <Spinner v-if="loading"></Spinner>
       <div v-else-if="error.length !== 0">{{ error }}</div>
-      <ul v-else-if="repositories.length !== 0">
-        <li v-for="item in repositories" :key="item.id">
+      <ul v-else-if="starredRepos.length !== 0">
+        <li v-for="item in starredRepos" :key="item.id">
           <Post :name="item.owner.login" :profileImg="item.owner.avatar_url">
             <template #content>
               <div class="title">{{ item.name }}</div>
               <div class="sub-title">
                 {{ item.description }}
               </div>
-              <Socials
-                :star="item.stargazers_count.toString()"
-                :fork="item.forks_count.toString()"
-              ></Socials>
+              <Socials :star="item.stargazers_count.toString()" :fork="item.forks_count.toString()"></Socials>
             </template>
           </Post>
         </li>
@@ -88,16 +75,20 @@ export default {
       repositories: (state) => state.repositories.data,
       loading: (state) => state.repositories.loading,
       error: (state) => state.repositories.error,
+      user: (state) => state.user.user,
+      starredRepos: (state) => state.repositories.starred
     }),
   },
   methods: {
     ...mapActions({
       getRepositories: "repositories/getRepositories",
+      getStarredRepos: "repositories/getStarredRepos",
     }),
     onContactClick(value) {
       this.$router.push({ name: "stories", params: { initialSlide: value } });
     },
     onHomeClick(value) {
+      this.getStarredRepos()
       console.log(value);
     },
     onProfileClick(value) {
@@ -109,8 +100,39 @@ export default {
   },
   created() {
     this.getRepositories();
+    this.getStarredRepos()
   },
 };
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style scoped lang="scss" src="./Feeds.scss" />

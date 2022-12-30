@@ -4,6 +4,7 @@ import {
   SET_LOADING,
   SET_ERROR,
   SET_README,
+  SET_STARRED_REPOS,
 } from "../types/mutation-types";
 
 export default {
@@ -12,6 +13,7 @@ export default {
     data: [],
     error: "",
     loading: false,
+    starred: [],
   },
   getters: {
     getRepositorieById: (state) => (id) => {
@@ -36,6 +38,9 @@ export default {
         return repo;
       });
     },
+    [SET_STARRED_REPOS](state, payload) {
+      state.starred = payload;
+    },
   },
   actions: {
     async getRepositories({ commit }) {
@@ -59,6 +64,18 @@ export default {
         const { data } = await api.readme.getReadme({ owner, repo });
         commit(SET_README, { id, content: data });
       } catch (error) {
+      } finally {
+        commit(SET_LOADING, false);
+      }
+    },
+    async getStarredRepos({ commit }) {
+      commit(SET_LOADING, true);
+
+      try {
+        const { data } = await api.repositories.getStarredRepo();
+        commit(SET_STARRED_REPOS, data);
+      } catch (error) {
+        console.log(error);
       } finally {
         commit(SET_LOADING, false);
       }

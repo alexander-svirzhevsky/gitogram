@@ -4,7 +4,7 @@
       <Icon name="Home"></Icon>
     </li>
     <li @click="emitOnProfileClick" class="menu__item">
-      <img class="avatar" alt="" src="../../assets/mockImg.png" />
+      <img class="avatar" alt="" :src="avatar" />
     </li>
     <li @click="emitOnSignOutClick" class="menu__item">
       <Icon name="Signout"></Icon>
@@ -19,6 +19,12 @@ export default {
   name: 'MenuList',
   components: {
     Icon
+  },
+  props: {
+    avatar: {
+      type: String,
+      required: true,
+    },
   },
   emits: ["onHomeClick", "onProfileClick", "onSignOutClick"],
   methods: {
