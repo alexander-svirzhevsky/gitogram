@@ -15,7 +15,7 @@
           <ul class="contacts__list">
             <li
               class="contacts__item"
-              v-for="contact in getUnStarredRepos"
+              v-for="contact in repositories"
               :key="contact.id"
             >
               <ContactItem
@@ -94,7 +94,6 @@ export default {
       user: (state) => state.user.user,
       starredRepos: (state) => state.repositories.starred,
     }),
-    ...mapGetters(["getUnStarredRepos"]),
   },
   methods: {
     ...mapActions({
