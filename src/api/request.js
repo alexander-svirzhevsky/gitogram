@@ -9,4 +9,7 @@ export const makeRequest = ({ url, method = "get", data = {}, headers = {} }) =>
     data,
     headers,
     baseURL,
+    params: {
+      t: new Date().getTime(),
+    },
   });

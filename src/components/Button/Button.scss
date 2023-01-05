@@ -39,3 +39,11 @@
     background: #9e9e9e;
   }
 }
+
+.disabled {
+  background: #9e9e9e;
+
+  &:hover {
+    background: #9e9e9e;
+  }
+}

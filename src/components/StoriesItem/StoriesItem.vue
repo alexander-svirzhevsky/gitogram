@@ -23,9 +23,19 @@
       </div>
     </div>
     <div class="slide__footer">
-      <Button @on-btn-click="onBtnClick" minWidth="270">
+      <Button
+        :loading="data.following.loading"
+        :color="data.following.status ? 'grey' : 'green'"
+        @on-btn-click="
+          $emit(
+            data.following.status ? 'onUnFollowClick' : 'onFollowClick',
+            data.id
+          )
+        "
+        minWidth="270"
+      >
         <template #default>
-          <span>Follow</span>
+          <span>{{ data.following.status ? "Unfollow" : "Follow" }}</span>
         </template>
       </Button>
     </div>
@@ -62,6 +72,15 @@ import { Icon } from "@/icons";
 
 export default {
   name: "StoriesItem",
+  components: {
+    TimeLine,
+    Profile,
+    Button,
+    Icon,
+    Placeholder,
+    Spinner,
+  },
+  emits: ["onPrevClick", "onNextClick", "onTimeLineFinish", "onFollowClick"],
   props: {
     active: Boolean,
     loading: Boolean,
@@ -79,15 +98,6 @@ export default {
       },
     },
     initialSlide: Number,
-  },
-  emits: ["onPrevClick", "onNextClick", "onTimeLineFinish"],
-  components: {
-    TimeLine,
-    Profile,
-    Button,
-    Icon,
-    Placeholder,
-    Spinner,
   },
   methods: {
     onBtnClick(value) {

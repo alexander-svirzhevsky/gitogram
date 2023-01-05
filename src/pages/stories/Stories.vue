@@ -25,7 +25,9 @@
               :displayBtns="displayBtns"
               @on-prev-click="hadleSlide(index - 1)"
               @on-next-click="hadleSlide(index + 1)"
-              @onTimeLineFinish="hadleSlide(index + 1)"
+              @onTimeLineFinish=""
+              @onFollowClick="starRepo"
+              @onUnFollowClick="unStarRepo"
             />
           </li>
         </ul>
@@ -69,6 +71,8 @@ export default {
     ...mapActions({
       getRepositories: "repositories/getRepositories",
       getReadme: "repositories/getReadme",
+      starRepo: "repositories/starRepo",
+      unStarRepo: "repositories/unStarRepo",
     }),
     onCloseClick() {
       this.$router.push("/");
@@ -83,6 +87,7 @@ export default {
         userAvatar: obj.owner?.avatar_url,
         userName: obj.owner?.login,
         content: obj.readme,
+        following: obj.following,
       };
     },
     moveSlide(index) {

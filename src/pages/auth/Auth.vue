@@ -7,7 +7,7 @@
           <span class="desc__text">More than just one repository.</span>
           <span class="desc__text">This is our digital world.</span>
         </div>
-        <Button minWidth="252" @onBtnClick="getCode">
+        <Button color="green" minWidth="252" @onBtnClick="getCode">
           <template #default>
             <div class="button-content">
               <span class="btn-text"> Authorize with github </span>
@@ -24,8 +24,7 @@
 </template>
 
 <script>
-
-import * as api from "../../api"
+import * as api from "../../api";
 import { Icon } from "../../icons";
 import Button from "../../components/Button/Button.vue";
 import env from "../../../env";
@@ -43,12 +42,12 @@ export default {
   },
   computed: {
     ...mapState({
-      user: (state) => state.user.user
-    })
+      user: (state) => state.user.user,
+    }),
   },
   methods: {
     ...mapActions({
-      getUser: "user/getUserData"
+      getUser: "user/getUserData",
     }),
     getCode() {
       const githubAuthApi = "https://github.com/login/oauth/authorize";
@@ -56,7 +55,7 @@ export default {
       const params = new URLSearchParams();
 
       params.append("client_id", env.CLIENT_ID);
-      params.append("scope", "repo:status read:user");
+      params.append("scope", "repo, user");
 
       window.location.href = `${githubAuthApi}?${params}`;
     },
@@ -66,98 +65,18 @@ export default {
 
     if (code) {
       try {
-        const { data: { token } } = await api.auth.getToken({ code })
+        const {
+          data: { token },
+        } = await api.auth.getToken({ code });
 
-        api.auth.setToken(token, true)
-        console.log("here");
+        api.auth.setToken(token, true);
         this.$router.replace({ name: "feeds" });
       } catch (error) {
         console.log(error);
       }
     }
-
   },
 };
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style lang="scss" scoped src="./Auth.scss" />

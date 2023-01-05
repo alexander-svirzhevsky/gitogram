@@ -4,28 +4,33 @@
       <TopPanel>
         <template #header>
           <Icon name="Logo"></Icon>
-          <MenuList :avatar="user.avatar_url" @on-home-click="onHomeClick" @on-profile-click="onProfileClick"
-            @on-sign-out-click="onSignOutClick" />
+          <MenuList
+            :avatar="user.avatar_url"
+            @on-home-click="onHomeClick"
+            @on-profile-click="onProfileClick"
+            @on-sign-out-click="onSignOutClick"
+          />
         </template>
         <template #contacts>
           <ul class="contacts__list">
-            <li class="contacts__item" v-for="contact in repositories" :key="contact.id">
-              <ContactItem :imgSrc="contact.owner.avatar_url" :name="contact.name"
-                @on-contact-click="onContactClick(contact.id)">
+            <li
+              class="contacts__item"
+              v-for="contact in repositories"
+              :key="contact.id"
+            >
+              <ContactItem
+                :imgSrc="contact.owner.avatar_url"
+                :name="contact.name"
+                @on-contact-click="onContactClick(contact.id)"
+              >
               </ContactItem>
             </li>
           </ul>
         </template>
       </TopPanel>
-      <Button loading color="green">
-        primary button
-      </Button>
-      <Button color="grey">
-        primary button
-      </Button>
-      <Button color="green">
-        Follow
-      </Button>
+      <Button loading color="green"> primary button </Button>
+      <Button color="grey"> primary button </Button>
+      <Button color="green"> Follow </Button>
     </div>
   </div>
   <div class="x-container">
@@ -40,7 +45,10 @@
               <div class="sub-title">
                 {{ item.description }}
               </div>
-              <Socials :star="item.stargazers_count.toString()" :fork="item.forks_count.toString()"></Socials>
+              <Socials
+                :star="item.stargazers_count.toString()"
+                :fork="item.forks_count.toString()"
+              ></Socials>
             </template>
           </Post>
         </li>
@@ -61,7 +69,7 @@ import Socials from "../../components/Post/socials/Socials.vue";
 import Shimmer from "../../components/Shimmer/Shimmer.vue";
 import Spinner from "../../components/Spinner/Spinner.vue";
 import { Icon } from "../../icons";
-import Button from "../../components/Button/Button.vue"
+import Button from "../../components/Button/Button.vue";
 
 export default {
   name: "Feeds",
@@ -74,7 +82,7 @@ export default {
     Socials,
     Shimmer,
     Spinner,
-    Button
+    Button,
   },
   data() {
     return {
@@ -87,7 +95,7 @@ export default {
       loading: (state) => state.repositories.loading,
       error: (state) => state.repositories.error,
       user: (state) => state.user.user,
-      starredRepos: (state) => state.repositories.starred
+      starredRepos: (state) => state.repositories.starred,
     }),
   },
   methods: {
@@ -99,7 +107,7 @@ export default {
       this.$router.push({ name: "stories", params: { initialSlide: value } });
     },
     onHomeClick(value) {
-      this.getStarredRepos()
+      this.getStarredRepos();
       console.log(value);
     },
     onProfileClick(value) {
@@ -109,63 +117,11 @@ export default {
       console.log(value);
     },
   },
-  created() {
+  mounted() {
     this.getRepositories();
-    this.getStarredRepos()
+    this.getStarredRepos();
   },
 };
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style scoped lang="scss" src="./Feeds.scss" />

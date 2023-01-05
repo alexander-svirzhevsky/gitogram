@@ -5,6 +5,7 @@ import {
   SET_ERROR,
   SET_README,
   SET_STARRED_REPOS,
+  SET_FOLLOWING,
 } from "../types/mutation-types";
 
 export default {
@@ -22,7 +23,15 @@ export default {
   },
   mutations: {
     [UPDATE_REPOSITORIES](state, payload) {
-      state.data = payload;
+      state.data = payload.map((item) => {
+        item.following = {
+          status: false,
+          loading: false,
+          error: "",
+        };
+
+        return item;
+      });
     },
     [SET_LOADING](state, payload) {
       state.loading = payload;
@@ -40,6 +49,18 @@ export default {
     },
     [SET_STARRED_REPOS](state, payload) {
       state.starred = payload;
+    },
+    [SET_FOLLOWING](state, payload) {
+      state.data.map((repo) => {
+        if (payload.id === repo.id) {
+          repo.following = {
+            ...repo.following,
+            ...payload.following,
+          };
+        }
+
+        return repo;
+      });
     },
   },
   actions: {
@@ -78,6 +99,72 @@ export default {
         console.log(error);
       } finally {
         commit(SET_LOADING, false);
+      }
+    },
+    async starRepo({ commit, getters }, id) {
+      const { name: repo, owner } = getters.getRepositorieById(id);
+
+      try {
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            loading: true,
+          },
+        });
+        await api.repositories.starRepo({ owner: owner.login, repo });
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            status: true,
+          },
+        });
+      } catch (error) {
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            error: error,
+          },
+        });
+      } finally {
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            loading: false,
+          },
+        });
+      }
+    },
+    async unStarRepo({ commit, getters }, id) {
+      const { name: repo, owner } = getters.getRepositorieById(id);
+
+      try {
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            loading: true,
+          },
+        });
+        await api.repositories.unStarRepo({ owner: owner.login, repo });
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            status: false,
+          },
+        });
+      } catch (error) {
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            error: error,
+          },
+        });
+      } finally {
+        commit(SET_FOLLOWING, {
+          id,
+          following: {
+            loading: false,
+          },
+        });
       }
     },
   },
