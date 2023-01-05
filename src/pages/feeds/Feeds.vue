@@ -15,7 +15,7 @@
           <ul class="contacts__list">
             <li
               class="contacts__item"
-              v-for="contact in repositories"
+              v-for="contact in getUnStarredRepos"
               :key="contact.id"
             >
               <ContactItem
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 
 import TopPanel from "../../components/TopPanel/TopPanel.vue";
 import MenuList from "../../components/MenuList/MenuList.vue";
@@ -94,6 +94,7 @@ export default {
       user: (state) => state.user.user,
       starredRepos: (state) => state.repositories.starred,
     }),
+    ...mapGetters(["getUnStarredRepos"]),
   },
   methods: {
     ...mapActions({
