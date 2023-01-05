@@ -8,7 +8,7 @@
             :avatar="user.avatar_url"
             @on-home-click="onHomeClick"
             @on-profile-click="onProfileClick"
-            @on-sign-out-click="onSignOutClick"
+            @on-sign-out-click="logout"
           />
         </template>
         <template #contacts>
@@ -99,6 +99,7 @@ export default {
     ...mapActions({
       getRepositories: "repositories/getRepositories",
       getStarredRepos: "repositories/getStarredRepos",
+      logout: "user/logout",
     }),
     onContactClick(value) {
       this.$router.push({ name: "stories", params: { initialSlide: value } });
@@ -110,11 +111,8 @@ export default {
     onProfileClick(value) {
       console.log(value);
     },
-    onSignOutClick(value) {
-      console.log(value);
-    },
   },
-  mounted() {
+  created() {
     this.getRepositories();
     this.getStarredRepos();
   },

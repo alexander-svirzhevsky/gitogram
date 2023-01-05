@@ -21,5 +21,10 @@ export default {
       const { data } = await api.user.getUser();
       commit(SET_USER, data);
     },
+    logout() {
+      localStorage.removeItem("token");
+
+      window.location.reload();
+    },
   },
 };
