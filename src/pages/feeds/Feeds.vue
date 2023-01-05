@@ -28,9 +28,6 @@
           </ul>
         </template>
       </TopPanel>
-      <Button loading color="green"> primary button </Button>
-      <Button color="grey"> primary button </Button>
-      <Button color="green"> Follow </Button>
     </div>
   </div>
   <div class="x-container">
