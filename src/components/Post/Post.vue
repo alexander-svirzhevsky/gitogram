@@ -6,28 +6,35 @@
     </div>
     <Toggler @onTogglClick="onTogglClick"></Toggler>
     <ul class="issues" v-if="shown">
-      <li v-for="_ in 3">
-        <IssuesItem name="joshua_l" desc="Enable performance measuring in production, at the user's request">
-        </IssuesItem>
+      <div v-if="!issues.length">Don't have any issues</div>
+      <li v-else v-for="issue in issues">
+        <IssuesItem :name="issue.user.login" :desc="issue.title"> </IssuesItem>
       </li>
     </ul>
+    <Placeholder :paragraphs="1" v-if="loading" />
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import Profile from "../Profile/Profile.vue";
 import Toggler from "../Toggler/Toggler.vue";
 import IssuesItem from "./issuesItem/IssuesItem.vue";
+import Placeholder from "../Placeholder/Placeholder.vue";
 
 export default {
   name: "Post",
   data() {
-    return { shown: false };
+    return {
+      shown: false,
+      loading: false,
+    };
   },
   components: {
     Profile,
     Toggler,
     IssuesItem,
+    Placeholder,
   },
   props: {
     profileImg: {
@@ -38,15 +45,43 @@ export default {
       type: String,
       required: true,
     },
+    repo: {
+      type: String,
+      required: true,
+    },
+    id: {
+      type: Number,
+      required: true,
+    },
+    issues: {
+      required: true,
+    },
   },
   methods: {
-    onTogglClick(value) {
+    async onTogglClick(value) {
+      if (value) {
+        if (this.issues === null) {
+          try {
+            this.loading = true;
+            await this.getIssues({
+              owner: this.name,
+              repo: this.repo,
+              id: this.id,
+            });
+          } catch (error) {
+            console.log(error);
+          } finally {
+            this.loading = false;
+          }
+        }
+      }
       this.shown = value;
     },
+    ...mapActions({
+      getIssues: "repositories/getIssues",
+    }),
   },
 };
 </script>
 
-<style scoped lang="scss" src="./Post.scss">
-
-</style>
+<style scoped lang="scss" src="./Post.scss"></style>

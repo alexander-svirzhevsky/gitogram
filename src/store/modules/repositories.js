@@ -6,6 +6,7 @@ import {
   SET_README,
   SET_STARRED_REPOS,
   SET_FOLLOWING,
+  SET_ISSUES,
 } from "../types/mutation-types";
 
 export default {
@@ -19,6 +20,9 @@ export default {
   getters: {
     getRepositorieById: (state) => (id) => {
       return state.data.find((item) => item.id === id);
+    },
+    getStarredRepoById: (state) => (id) => {
+      return state.starred.find((item) => item.id === id);
     },
   },
   mutations: {
@@ -48,7 +52,11 @@ export default {
       });
     },
     [SET_STARRED_REPOS](state, payload) {
-      state.starred = payload;
+      state.starred = payload.map((repo) => {
+        repo.issues = null;
+
+        return repo;
+      });
     },
     [SET_FOLLOWING](state, payload) {
       state.data.map((repo) => {
@@ -59,6 +67,14 @@ export default {
           };
         }
 
+        return repo;
+      });
+    },
+    [SET_ISSUES](state, payload) {
+      state.starred.map((repo) => {
+        if (repo.id === payload.id) {
+          repo.issues = payload.data;
+        }
         return repo;
       });
     },
@@ -165,6 +181,18 @@ export default {
             loading: false,
           },
         });
+      }
+    },
+    async getIssues({ commit, getters }, { id, owner, repo }) {
+      try {
+        const starredRepo = getters.getStarredRepoById(id);
+
+        if (starredRepo.issues) return;
+
+        const { data } = await api.repositories.getIssues({ owner, repo });
+        commit(SET_ISSUES, { id: starredRepo.id, data });
+      } catch (error) {
+        console.log(error);
       }
     },
   },

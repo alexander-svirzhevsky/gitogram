@@ -80,7 +80,13 @@ export default {
     Placeholder,
     Spinner,
   },
-  emits: ["onPrevClick", "onNextClick", "onTimeLineFinish", "onFollowClick"],
+  emits: [
+    "onPrevClick",
+    "onNextClick",
+    "onTimeLineFinish",
+    "onFollowClick",
+    "onUnFollowClick",
+  ],
   props: {
     active: Boolean,
     loading: Boolean,

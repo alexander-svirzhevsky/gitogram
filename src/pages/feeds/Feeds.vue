@@ -36,7 +36,13 @@
       <div v-else-if="error.length !== 0">{{ error }}</div>
       <ul v-else-if="starredRepos.length !== 0">
         <li v-for="item in starredRepos" :key="item.id">
-          <Post :name="item.owner.login" :profileImg="item.owner.avatar_url">
+          <Post
+            :id="item.id"
+            :repo="item.name"
+            :name="item.owner.login"
+            :profileImg="item.owner.avatar_url"
+            :issues="item.issues"
+          >
             <template #content>
               <div class="title">{{ item.name }}</div>
               <div class="sub-title">
@@ -109,6 +115,7 @@ export default {
       console.log(value);
     },
     onProfileClick(value) {
+      console.log(this.starredRepos);
       console.log(value);
     },
   },

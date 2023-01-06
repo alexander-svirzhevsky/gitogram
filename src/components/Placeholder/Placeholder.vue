@@ -1,5 +1,5 @@
 <template>
-  <div class="placeholder"></div>
+  <div v-if="paragraphs !== 1" class="placeholder"></div>
   <ul class="paragraph" v-for="paragraph in paragraphs" :key="paragraph">
     <li class="paragraph__list">
       <span class="line line--medium"></span>
