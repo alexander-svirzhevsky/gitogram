@@ -25,7 +25,7 @@
               :displayBtns="displayBtns"
               @on-prev-click="hadleSlide(index - 1)"
               @on-next-click="hadleSlide(index + 1)"
-              @onTimeLineFinish=""
+              @onTimeLineFinish="hadleSlide(index + 1)"
               @onFollowClick="starRepo"
               @onUnFollowClick="unStarRepo"
             />
