@@ -4,14 +4,25 @@
       <TopPanel>
         <template #header>
           <Icon name="Logo"></Icon>
-          <MenuList :avatar="user.avatar_url" @on-home-click="onHomeClick" @on-profile-click="onProfileClick"
-            @on-sign-out-click="logout" />
+          <MenuList
+            :avatar="user.avatar_url"
+            @on-home-click="onHomeClick"
+            @on-profile-click="onProfileClick"
+            @on-sign-out-click="logout"
+          />
         </template>
         <template #contacts>
           <ul class="contacts__list">
-            <li class="contacts__item" v-for="contact in repositories" :key="contact.id">
-              <ContactItem :imgSrc="contact.owner.avatar_url" :name="contact.name"
-                @on-contact-click="onContactClick(contact.id)">
+            <li
+              class="contacts__item"
+              v-for="contact in repositories"
+              :key="contact.id"
+            >
+              <ContactItem
+                :imgSrc="contact.owner.avatar_url"
+                :name="contact.name"
+                @on-contact-click="onContactClick(contact.id)"
+              >
               </ContactItem>
             </li>
           </ul>
@@ -25,14 +36,22 @@
       <div v-else-if="error.length !== 0">{{ error }}</div>
       <ul v-else-if="starredRepos.length !== 0">
         <li v-for="item in starredRepos" :key="item.id">
-          <Post :id="item.id" :repo="item.name" :name="item.owner.login" :profileImg="item.owner.avatar_url"
-            :issues="item.issues">
+          <Post
+            :id="item.id"
+            :repo="item.name"
+            :name="item.owner.login"
+            :profileImg="item.owner.avatar_url"
+            :issues="item.issues"
+          >
             <template #content>
               <div class="title">{{ item.name }}</div>
               <div class="sub-title">
                 {{ item.description }}
               </div>
-              <Socials :star="item.stargazers_count.toString()" :fork="item.forks_count.toString()"></Socials>
+              <Socials
+                :star="item.stargazers_count.toString()"
+                :fork="item.forks_count.toString()"
+              ></Socials>
             </template>
           </Post>
         </li>
@@ -43,9 +62,9 @@
 </template>
 
 <script>
-import { onMounted, computed } from 'vue'
-import { mapActions, mapState, useStore } from "vuex";
-import { useRouter, useRoute } from 'vue-router'
+import { onMounted, computed } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 import TopPanel from "../../components/TopPanel/TopPanel.vue";
 import MenuList from "../../components/MenuList/MenuList.vue";
@@ -71,29 +90,29 @@ export default {
     Button,
   },
   setup() {
-    const { dispatch, state } = useStore()
-    const router = useRouter()
+    const { dispatch, state } = useStore();
+    const router = useRouter();
 
     const logout = () => {
-      dispatch("user/logout")
-    }
+      dispatch("user/logout");
+    };
 
     const onContactClick = (value) => {
-      router.push({ name: "stories", params: { initialSlide: value } })
-    }
+      router.push({ name: "stories", params: { initialSlide: value } });
+    };
 
     const onHomeClick = () => {
       dispatch("repositories/getStarredRepos");
-    }
+    };
 
-    const onProfileClick = (value) => {
-      console.log(value);
-    }
+    const onProfileClick = () => {
+      router.push({ name: "user" });
+    };
 
     onMounted(() => {
       dispatch("repositories/getRepositories");
       dispatch("repositories/getStarredRepos");
-    })
+    });
 
     return {
       repositories: computed(() => state.repositories.data),
@@ -104,22 +123,10 @@ export default {
       logout,
       onContactClick,
       onHomeClick,
-      onProfileClick
-    }
+      onProfileClick,
+    };
   },
 };
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style scoped lang="scss" src="./Feeds.scss" />

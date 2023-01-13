@@ -13,12 +13,12 @@
 </template>
 
 <script>
-import { Icon } from "../../icons"
+import { Icon } from "../../icons";
 
 export default {
-  name: 'MenuList',
+  name: "MenuList",
   components: {
-    Icon
+    Icon,
   },
   props: {
     avatar: {
@@ -29,18 +29,16 @@ export default {
   emits: ["onHomeClick", "onProfileClick", "onSignOutClick"],
   methods: {
     emitOnHomeClick() {
-      this.$emit("onHomeClick", "home link")
+      this.$emit("onHomeClick", "home link");
     },
     emitOnProfileClick() {
-      this.$emit("onProfileClick", "profile link")
+      this.$emit("onProfileClick");
     },
     emitOnSignOutClick() {
-      this.$emit("onSignOutClick", "sign out link")
-    }
-  }
-}
+      this.$emit("onSignOutClick");
+    },
+  },
+};
 </script>
-  
-<style scoped lang="scss" src="./MenuList.scss">
 
-</style>
+<style scoped lang="scss" src="./MenuList.scss"></style>
